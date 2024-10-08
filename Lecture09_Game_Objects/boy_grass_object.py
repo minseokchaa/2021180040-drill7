@@ -31,11 +31,29 @@ class Small_ball:
         self.x, self.y = random.randint(100, 700), 599
         self.image = load_image('ball21x21.png')
     def update(self):
+        if self.y > 50:
+            self.y -= random.randint(1,20)
+        elif self.y < 50:
+            self.y = 50
 
-        self.y -= 5
     def draw(self):
         self.image.draw(self.x,self.y)
     pass
+
+class Big_ball:
+    def __init__(self):
+        self.x, self.y = random.randint(100, 700), 599
+        self.image = load_image('ball41x41.png')
+    def update(self):
+        if self.y > 50:
+            self.y -= random.randint(1,20)
+        elif self.y < 50:
+            self.y = 50
+
+    def draw(self):
+        self.image.draw(self.x,self.y)
+    pass
+
 
 
 def handle_events():
@@ -52,14 +70,15 @@ def handle_events():
 def reset_world():
     global running
     global grass
-    global boy
     global team
     global small_balls
+    global big_balls
 
     running = True
     grass = Grass()         # 잔디를 생성한다. 객체 생성
     team = [Boy() for i in range(11)]
     small_balls = [Small_ball() for i in range(10)]
+    big_balls = [Big_ball() for i in range(10)]
 
 running = True
 
@@ -70,6 +89,9 @@ def update_world():
 
     for Small_ball in small_balls:
         Small_ball.update()
+    for Big_ball in big_balls:
+        Big_ball.update()
+
     pass
 
 def render_world():
@@ -80,6 +102,9 @@ def render_world():
 
     for Small_ball in small_balls:
         Small_ball.draw()
+
+    for Big_ball in big_balls:
+        Big_ball.draw()
     update_canvas()
 
 
