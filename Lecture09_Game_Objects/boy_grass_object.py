@@ -26,6 +26,18 @@ class Boy:
         self.image.clip_draw(self.frame*100,0,100,100,self.x,self.y)
 
 
+class Small_ball:
+    def __init__(self):
+        self.x, self.y = random.randint(100, 700), 599
+        self.image = load_image('ball21x21.png')
+    def update(self):
+
+        self.y -= 5
+    def draw(self):
+        self.image.draw(self.x,self.y)
+    pass
+
+
 def handle_events():
     global running
     events = get_events()
@@ -41,11 +53,13 @@ def reset_world():
     global running
     global grass
     global boy
-    global  team
+    global team
+    global small_balls
 
     running = True
     grass = Grass()         # 잔디를 생성한다. 객체 생성
     team = [Boy() for i in range(11)]
+    small_balls = [Small_ball() for i in range(10)]
 
 running = True
 
@@ -53,6 +67,9 @@ def update_world():
     grass.update()  #객체의 상태를 업데이트
     for boy in team:
         boy.update()
+
+    for Small_ball in small_balls:
+        Small_ball.update()
     pass
 
 def render_world():
@@ -60,6 +77,9 @@ def render_world():
     grass.draw()
     for boy in team:
         boy.draw()
+
+    for Small_ball in small_balls:
+        Small_ball.draw()
     update_canvas()
 
 
