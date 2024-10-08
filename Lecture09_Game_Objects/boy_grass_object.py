@@ -45,10 +45,10 @@ class Big_ball:
         self.x, self.y = random.randint(100, 700), 599
         self.image = load_image('ball41x41.png')
     def update(self):
-        if self.y > 50:
+        if self.y > 60:
             self.y -= random.randint(1,20)
-        elif self.y < 50:
-            self.y = 50
+        elif self.y < 60:
+            self.y = 60
 
     def draw(self):
         self.image.draw(self.x,self.y)
